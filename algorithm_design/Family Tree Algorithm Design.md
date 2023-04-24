@@ -26,6 +26,8 @@ Now that the family structure of the tree is clearly defined, I have to create t
 
 Phil &rarr; Monica &rarr; Marj &rarr; Jerome &rarr; Clarence
 
+To figure out the path between two people in the tree I have devised and algorithm. For the algorithm you first need the root, person A and person B. If the root in the tree is not known then it can be found going up the tree from person A or person B until you find the person who has no parents. The root in the example family tree is Elizabeth
+
 Knowing the path between the two people is the actual connection, but it does not tell us how these people are related. For example we do not know if Phil is the father of Monica or Monica is the mother of Phil, we just know they are connected. To actually figure this out we can count the number of ups and downs in the path of the tree. This information can be used in the consanguinity table below:
 
 ![Consanguinity Table](Table_of_Consanguinity_showing_degrees_of_relationship.svg.png)
@@ -43,6 +45,8 @@ Here is the pseudocode for the path finding algorithm:
 ~~~
 
 ## Algorithm 2 Graph Approach
+
+Another approach to solving this algorithm is to create a graph of the family tree rather than the tree. A tree is actually just a special type of a graph. In this algorithm each person node in the family tree knows their parents and thier children. This is different from the previous tree algorithm where every t
 
 
 
