@@ -6,6 +6,8 @@ The algorithm is being designed for the following problem:
 
 The family tree I will use to test my algorithm is below.
 
+## Algorithm 1 Tree Approach
+
 ![Family Tree](example_family_tree.png)
 
 Please note this family tree does not have both parents, which will actually help my algorithm as you will soon see. It turns out there is already a data type in computer science called a tree, and it has many applications. Each person in the tree is called a node, and ever child node has to have a parent node. Below is an example of a tree from wikipedia.
@@ -28,6 +30,10 @@ Knowing the path between the two people is the actual connection, but it does no
 
 ![Consanguinity Table](Table_of_Consanguinity_showing_degrees_of_relationship.svg.png)
 
+To figure out the number of ups and downs I will assign a generation number to each person. For example Elizabeth is generation 1 and Marj is generation 2.
+
+Phil &rarr; Monica &rarr; Marj &rarr; Jerome &rarr; Clarence
+
 For example From Phil to Clarence its two ups and two downs, so based on the table they are first cousins.
 
 Here is the pseudocode for the path finding algorithm:
@@ -36,8 +42,14 @@ Here is the pseudocode for the path finding algorithm:
 
 ~~~
 
+## Algorithm 2 Graph Approach
+
+
+
+
 Here are the sources I gathered my information from:
 https://en.wikipedia.org/wiki/Consanguinity
 https://en.wikipedia.org/wiki/Tree_(data_structure)
 https://en.wikipedia.org/wiki/Depth-first_search
 https://en.wikipedia.org/wiki/Breadth-first_search
+https://en.wikipedia.org/wiki/Lowest_common_ancestor
