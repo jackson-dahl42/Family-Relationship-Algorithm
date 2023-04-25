@@ -8,27 +8,62 @@ class Person {
 
 let Elizabeth = new Person("Elizabeth", null, "female")
 let Marj = new Person("Marj", Elizabeth, "female")
-let Rosanne = new Person("Rosanne", Rosanne, "female")
+let Rosanne = new Person("Rosanne", Elizabeth, "female")
+let Kim = new Person("Kim", Marj, "male")
+let JohnG = new Person("John G", Kim, "male")
 
-function findConnection(personA, personB) {
-    let personApath = []
-    let personBpath = []
-    for(;;) {
-
+function findPath(personA, personB) {
+  let pathA = [personA]
+  let pathB = [personB]
+  while(true) {
+    endOfPathA = pathA[pathA.length - 1]
+    endOfPathB = pathB[pathB.length - 1]
+    if(endOfPathA === endOfPathB) {
+      let numUps = pathA.length - 1
+      let numDowns = pathB.length - 1
+      console.log(numUps)
+      console.log(numDowns)
+      break
     }
+    else {
+      if(endOfPathA.parent != null) {
+        pathA.push(endOfPathA.parent)
+      }
+      if(endOfPathB.parent != null) {
+        pathB.push(endOfPathB.parent)
+      }
+    }
+  }
 }
 
+findPath(Elizabeth, JohnG)
+
 /* Algorithm #1 Pseudocode
-Create a person class that contains a name, parent, and gender.
-Create the family tree by creating each person
-let pathA be an empty array
-let pathB be an empty array
-Push person A in path A
-Push person B in path B
-Start a loop that runs until the connection between person A and B is found.
-Check if the last element of both path arrays are equal.
-If equal then 
 
+class Person
+define attribute name
+define attribute parent
+define attribute gender
+end class
 
+create tree using Person class to make people
+
+let personA = person input
+let personB = person input
+let pathA = empty array
+let pathB = empty array
+loop forever
+  let endOfPathA = the last element in pathA
+  let endOfPathB = the last element in pathB
+  if endOfPathA is equal to endOfPathB{
+    the number of ups in the path = the number of the elements in the array minus 1
+    the number of downs in the path = the number of the elements in the array minus 1
+    consanguinity table
+    break
+  }
+  other wise {
+    push the parent of endOfPathA to the end of the pathA array
+    push the parent of endOfPathB to the end of the pathB array
+  }
 
 */
