@@ -13,30 +13,59 @@ let Kim = new Person("Kim", Marj, "male")
 let JohnG = new Person("John G", Kim, "male")
 
 function findPath(personA, personB) {
-  let pathA = [personA]
-  let pathB = [personB]
+  let curPersonA = personA
+  let curPersonB = personB
+  let numUp = 0
+  let numDown = 0
   while(true) {
-    endOfPathA = pathA[pathA.length - 1]
-    endOfPathB = pathB[pathB.length - 1]
-    if(endOfPathA === endOfPathB) {
-      let numUps = pathA.length - 1
-      let numDowns = pathB.length - 1
-      console.log(numUps)
-      console.log(numDowns)
+    
+    if (curPersonA === curPersonB) {
+      return [numUp, numDown]
       break
     }
-    else {
-      if(endOfPathA.parent != null) {
-        pathA.push(endOfPathA.parent)
-      }
-      if(endOfPathB.parent != null) {
-        pathB.push(endOfPathB.parent)
-      }
+    if (curPersonA.parent != null) {
+      curPersonA = curPersonA.parent
+      numUp ++
+    }
+    if (curPersonB.parent != null) {
+      curPersonB = curPersonB.parent
+      numDown ++
     }
   }
 }
 
-findPath(Elizabeth, JohnG)
+function findPathRecursive(personA, personB) {
+  if (personA === personB) {
+    return [0,0]
+  }
+  if(personA.parent === null && personB.parent != null) {
+    return addArrays([0,1], findPathRecursive(personA, personB.parent))
+  }
+  if(personB.parent === null && personA.parent != null) {
+    return addArrays([1,0], findPathRecursive(personA.parent, personB))
+  }
+  else {
+    return addArrays([1,1], findPathRecursive(personA.parent, personB.parent))
+  }
+}
+
+function addArrays(arr1, arr2) {
+  const arr = []
+  for (let i = 0; i < arr1.length; i++) {
+    arr.push(arr1[i] + arr2[i])
+  }
+  return arr
+}
+
+//Num ups
+console.log(findPathRecursive(Elizabeth, JohnG)[0])
+//Num downs
+console.log(findPathRecursive(Elizabeth, JohnG)[1])
+
+//Num ups
+console.log(findPath(Elizabeth, JohnG)[0])
+//Num downs
+console.log(findPath(Elizabeth, JohnG)[1])
 
 /* Algorithm #1 Pseudocode
 
