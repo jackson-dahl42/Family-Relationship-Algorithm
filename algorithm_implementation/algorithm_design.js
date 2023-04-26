@@ -13,20 +13,26 @@ let Kim = new Person("Kim", Marj, "male")
 let JohnG = new Person("John G", Kim, "male")
 
 function findPath(personA, personB) {
-  let curPersonA = personA
-  let curPersonB = personB
   let numUp = 0
   let numDown = 0
+  let curPersonA = personA
+  let curPersonB = personB
   while(true) {
-    
     if (curPersonA === curPersonB) {
       return [numUp, numDown]
       break
     }
+
     if (curPersonA.parent != null) {
       curPersonA = curPersonA.parent
       numUp ++
     }
+
+    if (curPersonA === curPersonB) {
+      return [numUp, numDown]
+      break
+    }
+
     if (curPersonB.parent != null) {
       curPersonB = curPersonB.parent
       numDown ++
@@ -34,38 +40,25 @@ function findPath(personA, personB) {
   }
 }
 
-function findPathRecursive(personA, personB) {
-  if (personA === personB) {
-    return [0,0]
+function consanguinityTable(numbOfGenerationsFromCommonAncestor) {
+  let numUp = numbOfGenerationsFromCommonAncestor[0]
+  let numDown = numbOfGenerationsFromCommonAncestor[1]
+  if(numUp === 0 && numDown === 0) return " is "
+
+  if(numUp === 0 && numDown >= 1) {
+    return "is the " + prefix + "child"
   }
-  if(personA.parent === null && personB.parent != null) {
-    return addArrays([0,1], findPathRecursive(personA, personB.parent))
-  }
-  if(personB.parent === null && personA.parent != null) {
-    return addArrays([1,0], findPathRecursive(personA.parent, personB))
-  }
-  else {
-    return addArrays([1,1], findPathRecursive(personA.parent, personB.parent))
-  }
+
+
+  if(numUp === 0 && numDown === 1) return " is the parent of "
+  if(numUp === 1 && numDown === 1) return " is the sibling of "
 }
 
-function addArrays(arr1, arr2) {
-  const arr = []
-  for (let i = 0; i < arr1.length; i++) {
-    arr.push(arr1[i] + arr2[i])
-  }
-  return arr
+function findRelation(personA, personB) {
+  return personA.name + consanguinityTable(findPath(personA, personB)) + personB.name
 }
-
-//Num ups
-console.log(findPathRecursive(Elizabeth, JohnG)[0])
-//Num downs
-console.log(findPathRecursive(Elizabeth, JohnG)[1])
-
-//Num ups
-console.log(findPath(Elizabeth, JohnG)[0])
-//Num downs
-console.log(findPath(Elizabeth, JohnG)[1])
+console.log(findPath(Marj, Rosanne))
+console.log(findRelation(Rosanne, Marj))
 
 /* Algorithm #1 Pseudocode
 
