@@ -11,8 +11,12 @@ let Marj = new Person("Marj", Elizabeth, "female")
 let Rosanne = new Person("Rosanne", Elizabeth, "female")
 let Kim = new Person("Kim", Marj, "male")
 let JohnG = new Person("John G", Kim, "male")
+let Monica = new Person("Monica", Marj, "female")
+let Phil = new Person("Phil", Monica, "male")
+let Lincoln = new Person("Lincoln", Phil, "male")
+let Alex = new Person("Alex", Lincoln, "male")
 
-function findPath(personA, personB) {
+function findNumberOfGenerations(personA, personB) {
   let numUp = 0
   let numDown = 0
   let curPersonA = personA
@@ -20,6 +24,11 @@ function findPath(personA, personB) {
   while(true) {
     if (curPersonA === curPersonB) {
       return [numUp, numDown]
+      break
+    }
+
+    if (curPersonA === personB) {
+      return [numUp, 0]
       break
     }
 
@@ -32,11 +41,17 @@ function findPath(personA, personB) {
       return [numUp, numDown]
       break
     }
+    
+    if (curPersonB === personA) {
+      return [0, numDown]
+      break
+    }
 
     if (curPersonB.parent != null) {
       curPersonB = curPersonB.parent
       numDown ++
     }
+
   }
 }
 
@@ -44,21 +59,16 @@ function consanguinityTable(numbOfGenerationsFromCommonAncestor) {
   let numUp = numbOfGenerationsFromCommonAncestor[0]
   let numDown = numbOfGenerationsFromCommonAncestor[1]
   if(numUp === 0 && numDown === 0) return " is "
-
-  if(numUp === 0 && numDown >= 1) {
-    return "is the " + prefix + "child"
-  }
-
-
+  if(numUp === 1 && numDown === 0) return "is the child"
   if(numUp === 0 && numDown === 1) return " is the parent of "
   if(numUp === 1 && numDown === 1) return " is the sibling of "
 }
 
 function findRelation(personA, personB) {
-  return personA.name + consanguinityTable(findPath(personA, personB)) + personB.name
+  return personA.name + consanguinityTable(findNumberOfGenerations(personA, personB)) + personB.name
 }
-console.log(findPath(Marj, Rosanne))
-console.log(findRelation(Rosanne, Marj))
+console.log(findNumberOfGenerations(Alex, Phil))
+console.log(findRelation(Alex, Phil))
 
 /* Algorithm #1 Pseudocode
 
