@@ -36,6 +36,7 @@ let Clarence = new Person("Clarence", Jerome, "male")
 let Lincoln = new Person("Lincoln", Phil, "male")
 let Mo = new Person("Mo", Ellane, "male")
 let Alex = new Person("Alex", Lincoln, "male")
+let count = 0
 
 // Algorithm that finds number of generations up and number of generations down from personA to personB
 function findNumberOfGenerations(personA, personB) {
@@ -47,6 +48,7 @@ function findNumberOfGenerations(personA, personB) {
       let curPersonB = pathB[pathB.length - 1]
       if(curPersonA === curPersonB) {
         for(;;) {
+          count++
           curPersonA = pathA[pathA.length - 1]
           curPersonB = pathB[pathB.length - 1]
           if(curPersonA != curPersonB) {
@@ -60,7 +62,10 @@ function findNumberOfGenerations(personA, personB) {
         return [pathA.length, pathB.length]
         break
       }
-      if(curPersonA.parent != null) {
+      else {
+        count ++
+      }
+      if (curPersonA.parent != null) {
         pathA.push(curPersonA.parent)
       }
       if(curPersonB.parent != null) {
@@ -140,5 +145,5 @@ function findRelation(personA, personB) {
   return personA.name + consanguinityTable(findNumberOfGenerations(personA, personB), personA.gender) + personB.name
 }
 
-console.log(findNumberOfGenerations(Patricia, Alex))
-console.log(findRelation(Elizabeth, Alex))
+console.log(findRelation(Phil, Anna))
+console.log(count)
