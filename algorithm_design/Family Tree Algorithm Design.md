@@ -8,7 +8,9 @@ The family tree I will use to test my algorithm is below.
 
 ![Family Tree](example_family_tree.png)
 
-There are many ways to represent the family tree in code. You could create a graph or a tree or some other data stucture. The way I chose to represent the tree is that there is a person class and each person is given a name, a parent, and a gender.
+There are many ways to represent the family tree in code. You could create a graph or a tree or some other data stucture. The way I chose to represent the tree is that there is a person class and each person is given a name, a parent, and a gender. As each person only knows the parent here is what a representation of the tree looks like as it is coded.
+
+![Family Tree](family_tree_code_diagram.png)
 
 ~~~
 /* Algorithm #1 Pseudocode
@@ -64,9 +66,11 @@ Here is an example of a consanguinity table below.
 
 ## Runtime Efficiency/Complexity
 
-If n is the number of people in the family tree then the algorithm has a different run time based on the number of people in the tree and the shape of the paths in the tree. When I considered a straight line I theorize that the worst case complexity is O(2n), but because the complexity only cares about the rate of growth I ignore the constant and just say O(n), which means the algorithm is linear. I say this because in the worst case scenario of a straight line the where personA is the parent of personB the algorithm is set up so they go all the way up before they are equal. This part of the algorithm takes n steps. Then after the path of A and B reach the top, the algorithm goes and removes the people from the array that are the same. In this scenario this takes n steps. 
+If n is the number of people in the family tree then the algorithm has a different run time based on the number of people in the tree and the shape of the paths in the tree. Because my algorithm is based on the parents of each person it only cares about the number of people from personA up to personB, that is to say it only cares about the height of the tree so h is the height of the tree. When I considered a straight line I theorize that the worst case complexity is O(2h), but because the complexity only cares about the type of growth I can ignore the constant and just say it is O(h) or linear. I say this because in the worst case scenario of a straight line the where personA is the parent of personB the algorithm is set up so they go all the way up before they are equal. This part of the algorithm takes n steps. Then after the path of A and B reach the top, the algorithm goes and removes the people from the array that are the same. In this scenario this takes n steps. 
 
-The algorithm as it is currently set up relies on a consanguinity table, so there is that limitation. For example you would not be able to run my code in a tree with 1000 generations. To solve this problem I will need to create an algorithm that can add suffixes and prefixes based on the number of generations up and the number of generations down which I certainly believe is possible.
+![graph](Worst case complexity of algorithm.png)
+
+The algorithm as it is currently set up relies on a consanguinity table, so there is that limitation. For example you would not be able to run my code in a tree with 1000 generations. To solve this problem I will need to create an algorithm that can add suffixes and prefixes based on the number of generations up and the number of generations down which I certainly believe is possible. This algorithm might have a complexity of its own and will change the current complexity.
 
 Sources
 https://en.wikipedia.org/wiki/Consanguinity
