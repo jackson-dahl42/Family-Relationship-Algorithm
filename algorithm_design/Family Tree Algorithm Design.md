@@ -12,6 +12,14 @@ There are many ways to represent the family tree in code. You could create a gra
 
 ![Family Tree](family_tree_code_diagram.png)
 
+Based on tree ever person only knows their parent, which is different from the family tree as each person is connected to thier parents, children, and siblings on the family tree. They are connected via something called a sibship line. I chose to only include the parents of each person as it would be easy to implement rather than something like keeping track of the connection between everyone.
+
+Below is the design of my algorithm explained:
+
+First input the two people you want to find the relationship between (personA and personB). The two people are objects with information like their parents and gender. My algorithm first checks if personA is personB then returns [0,0]. If not the algorithm creates two arrays that each contain personA and personB. Next it checks if the last element in both arrays are equal. If not it pushes the parents of each person to the array. Then it repeats until it is equal. This algorithm works for this particular family tree where it only records one parent, but a different algorithm will need to be created for two parents as it branches. Once the people in both ends of the array are equal then the algorithm checks if each the ends of both arrays are equal. If they are equal then it removes them from the array. Then it repeats until it finds two people that are not equal. It then returns the number of people in both arrays. These numbers are the number of generations from personA to the lowest common ancestor and the number of generations from personB to the lowest common ancestor. These numbers can then be inputted into a consanguity table or algorithm. A trade off is that it has to store two arrays. This algorithm is also does not work for inlaws or multiple parents. Another trade off is that it requires a consainguinity table or seperate algorithm.
+
+Below is the pseudocode for the algorithm
+
 ~~~
 /* Algorithm #1 Pseudocode
 
